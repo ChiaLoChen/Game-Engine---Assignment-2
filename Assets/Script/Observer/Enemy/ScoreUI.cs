@@ -8,6 +8,20 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     public int score = 0;
     public int maxScore = 3;
 
+    private bool _isDirty = true;
+
+    public int Score
+    {
+        get { return score; }
+        set
+        {
+            if (score != value)
+            {
+                score = value;
+                SetDirty();
+            }
+        }
+    }
     [SerializeField]
     TextMeshProUGUI scoreText;
 
@@ -15,7 +29,6 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     {
         scoreText = GameObject.Find("scoreText").GetComponent<TextMeshProUGUI>();
     }
-
     public void OnHealthChanged(int newHealth)
     {
         Debug.Log($"Enemy health changed: {newHealth}");
@@ -30,14 +43,20 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     }
     void OnGUI()
     {
-        //score = 
-        //GUILayout.BeginArea(
-        //    new Rect(50, 50, 100, 2000));
-        //GUILayout.BeginHorizontal("box");
-        //GUILayout.Label("score: "+score);
-        //GUILayout.EndHorizontal();
-        //GUILayout.EndArea();
-
         scoreText.text = score.ToString();
+    }
+
+    private void SetDirty()
+    {
+        _isDirty = true;
+    }
+
+    private void Update()
+    {
+        if (_isDirty)
+        {
+            Debug.Log("Updating internal state with score: " + score);
+            _isDirty = false;
+        }
     }
 }
