@@ -33,12 +33,13 @@ public class Generator : singleton<Generator>
             {
                 if (Random.value < wallProbability)
                 {
-if(Random.value < 0.5){
-                    CreateElement(i, j, "Wall", Quaternion.identity, 0);
-}
-else{
-CreateElement(i, j, "Wall", Quaternion.Euler(0, 90, 0), 0);
-}
+					if(Random.value < 0.5){
+                    	CreateElement(i, j, "Wall", Quaternion.identity, 0);
+					}
+					else{
+						CreateElement(i, j, "Wall", Quaternion.Euler(0, 90, 0), 0);
+Debug.Log("vertical");
+					}
                 }
             }
         }
@@ -61,7 +62,7 @@ CreateElement(i, j, "Wall", Quaternion.Euler(0, 90, 0), 0);
         if (type == "Wall")
         {
             position.y = 2; 
-            element.Create(position, wall, Quaternion.identity);
+            element.Create(position, wall, rotation);
         }
         else if(type == "Floor")
         {
