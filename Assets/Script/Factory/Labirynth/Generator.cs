@@ -33,7 +33,12 @@ public class Generator : singleton<Generator>
             {
                 if (Random.value < wallProbability)
                 {
+if(Random.value < 0.5){
                     CreateElement(i, j, "Wall", Quaternion.identity, 0);
+}
+else{
+CreateElement(i, j, "Wall", Quaternion.Euler(0, 90, 0), 0);
+}
                 }
             }
         }
