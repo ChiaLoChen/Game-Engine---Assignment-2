@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 500
+  speed: 50
   distance: 15
   health: 5
   maxScore: 3

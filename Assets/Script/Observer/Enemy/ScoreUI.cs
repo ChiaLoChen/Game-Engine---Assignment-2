@@ -9,19 +9,6 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     public int maxScore = 3;
 
     private bool _isDirty = true;
-
-    public int Score
-    {
-        get { return score; }
-        set
-        {
-            if (score != value)
-            {
-                score = value;
-                SetDirty();
-            }
-        }
-    }
     [SerializeField]
     TextMeshProUGUI scoreText;
 
@@ -38,12 +25,8 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     public void OnEnemyDeath()
     {
         score += Random.Range(1, maxScore);
-        Debug.Log($"Enemy defeated! Score: {score}");
+        //Debug.Log($"Enemy defeated! Score: {score}");
         // Update the score UI here if needed
-    }
-    void OnGUI()
-    {
-        scoreText.text = score.ToString();
     }
 
     public void SetDirty()
@@ -55,7 +38,7 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     {
         if (_isDirty)
         {
-            Debug.Log("Updating internal state with score: " + score);
+            scoreText.text = score.ToString();
             _isDirty = false;
         }
     }
