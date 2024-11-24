@@ -9,13 +9,19 @@ Link to Video Report:
 Chia Lo Chen
 
 GDP improvement from the previous assignment:
+- Labrynth generator update the vertical wall
+- 
 
 Optimization Design Pattern:
+- Dirty Flag:
+  - UI changes such as score UI
+- Object Pooling
+  - player bullet and enemy spawn
 
-DLL/Plugins
-
-Performance profiling
-
+DLL/Plugins:
+- 
+Performance profiling:
+- 
 
   
 
