@@ -38,7 +38,6 @@ public class Generator : singleton<Generator>
 					}
 					else{
 						CreateElement(i, j, "Wall", Quaternion.Euler(0, 90, 0), 0);
-Debug.Log("vertical");
 					}
                 }
             }
