@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
+    public IObjectPool<Bullet> Pool { get; set; }
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -28,5 +30,15 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+
+    private void ReturnToPool()
+    {
+        Pool.Release(this);
+    }
+
+    private void ResetDrone()
+    {
+        
     }
 }
