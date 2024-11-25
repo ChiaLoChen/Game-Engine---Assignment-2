@@ -70,7 +70,7 @@ public class EnemyMovement : Observer
         scoreUI.SetDirty();
         Destroy(gameObject);
     }
-
+/*
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Wall")
@@ -78,5 +78,5 @@ public class EnemyMovement : Observer
             rb.AddForce(transform.up.normalized * 5 * 200f, ForceMode.Force);
         }
     }
-
+*/
 }

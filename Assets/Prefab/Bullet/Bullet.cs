@@ -14,23 +14,19 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = transform.forward * Time.deltaTime * 5000f;
+        rb.velocity = transform.forward * (Time.deltaTime * 5000f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag != "Player")
+        if (!other.CompareTag("Player") && !other.CompareTag("Bullet"))
         {
-            if(other.tag != "Bullet")
+            if (other.gameObject.GetComponent<EnemyMovement>() != null)
             {
-                if (other.gameObject.GetComponent<EnemyMovement>() != null)
-                {
-                    other.GetComponent<EnemyMovement>().TakeDamage(1);
-                }
-                Destroy(gameObject);
+                other.GetComponent<EnemyMovement>().TakeDamage(1);
             }
-            
+            Destroy(gameObject);
         }
-        
+
     }
 }

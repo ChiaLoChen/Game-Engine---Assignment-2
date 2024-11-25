@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,8 +6,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 2f;   // Jump height
     public Camera playerCamera;
 
-    private CharacterController controller;
-    private Vector3 velocity = new Vector3(0, 0, 0);
     public bool isGrounded;
 
     Rigidbody rb;
@@ -33,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         _camera = GameObject.FindGameObjectWithTag("MainCamera");
         _cameraFollow = _camera.GetComponent<CameraFollow>();
@@ -75,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
@@ -84,14 +80,14 @@ public class PlayerMovement : MonoBehaviour
     public void MoveForward()
     {
         //rb.velocity = transform.forward * moveSpeed;
-        rb.AddForce(transform.forward.normalized * moveSpeed * 10f * Time.deltaTime, ForceMode.Force);
+        rb.AddForce(transform.forward.normalized * (moveSpeed * 10f * Time.deltaTime), ForceMode.Force);
 
         //transform.position += transform.forward * moveSpeed * Time.deltaTime;  
     }
 
     public void MoveLeft()
     {
-        rb.AddForce(-transform.right.normalized * moveSpeed * 10f * Time.deltaTime, ForceMode.Force);
+        rb.AddForce(-transform.right.normalized * (moveSpeed * 10f * Time.deltaTime), ForceMode.Force);
 
         //transform.position -= transform.right * moveSpeed * Time.deltaTime;
 
@@ -101,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //transform.position += transform.right * moveSpeed * Time.deltaTime;
 
-        rb.AddForce(transform.right.normalized * moveSpeed * 10f * Time.deltaTime, ForceMode.Force);
+        rb.AddForce(transform.right.normalized * (moveSpeed * 10f * Time.deltaTime), ForceMode.Force);
 
 
     }
@@ -110,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //transform.position -= transform.forward * moveSpeed * Time.deltaTime;
 
-        rb.AddForce(-transform.forward.normalized * moveSpeed * 10f * Time.deltaTime, ForceMode.Force);
+        rb.AddForce(-transform.forward.normalized * (moveSpeed * 10f * Time.deltaTime), ForceMode.Force);
 
     }
 
@@ -124,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             isGrounded = false;
-            rb.AddForce(transform.up.normalized * jumpHeight * 200f, ForceMode.Force);
+            rb.AddForce(transform.up.normalized * (jumpHeight * 200f), ForceMode.Force);
         }
 
     }

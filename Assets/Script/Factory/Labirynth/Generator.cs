@@ -10,7 +10,6 @@ public class Generator : singleton<Generator>
     public int height = 10;
     public int gapsize = 2;
     public float wallProbability = 0.3f;
-    private List<Vector2Int> directions;
 
     void Start()
     {

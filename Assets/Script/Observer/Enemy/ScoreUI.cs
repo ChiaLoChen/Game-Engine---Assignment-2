@@ -11,7 +11,6 @@ public class ScoreUI : singleton<ScoreUI>, EnemyObserver
     private bool _isDirty = true;
     [SerializeField]
     TextMeshProUGUI scoreText;
-
     private void Start()
     {
         scoreText = GameObject.Find("scoreText").GetComponent<TextMeshProUGUI>();
