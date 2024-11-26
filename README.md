@@ -17,8 +17,9 @@ Optimization Design Pattern:
 
 DLL/Plugins:
 - Add in enemy dialogue
+
 Performance profiling:
-- 
+- After implementing project pooling, the CPU usage would dropped
 
   
 
