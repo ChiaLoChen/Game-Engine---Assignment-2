@@ -27,8 +27,10 @@ public class PlayerMovement : MonoBehaviour
     
     private bool _isRecording;
 
+    private ObjectPool _pool;
     void Start()
     {
+        _pool = gameObject.AddComponent<ObjectPool>();
         GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         _camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -112,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(bullet, transform.position, transform.rotation);
+        _pool.SpawnAndShoot();
     }
 
     public void Jump()

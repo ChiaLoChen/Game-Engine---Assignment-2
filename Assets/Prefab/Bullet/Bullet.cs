@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -7,16 +5,57 @@ public class Bullet : MonoBehaviour
 {
     public IObjectPool<Bullet> Pool { get; set; }
     Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 20f;
+    public float lifetime = 5f;
+
+    private Rigidbody _rigidbody;
+    private float _timeAlive;
+
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
     }
 
-    // Update is called once per frame
-    void Update()
+    // Reset bullet properties before returning it to the pool
+    public void ResetBullet()
     {
-        rb.velocity = transform.forward * (Time.deltaTime * 5000f);
+        _timeAlive = 0f; // Reset time alive
+        if (_rigidbody != null)
+        {
+            _rigidbody.velocity = Vector3.zero; // Stop any previous velocity
+        }
+    }
+
+    // Launch the bullet forward
+    public void LaunchBullet()
+    {
+        _timeAlive = 0f;
+        if (_rigidbody != null)
+        {
+            // Shoot the bullet forward in the current forward direction
+            _rigidbody.velocity = transform.forward * speed;
+        }
+
+        // Destroy the bullet after its lifetime
+        Invoke("ReturnToPool", lifetime);
+    }
+
+    // Return bullet to the pool after its lifetime
+    private void ReturnToPool()
+    {
+        Pool.Release(this); // Return the bullet to the pool after it is destroyed or goes out of bounds
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        // Optionally handle bullet collisions, e.g., hit targets
+        ReturnToPool(); // Return the bullet to the pool after collision
+    }
+
+    private void OnDisable()
+    {
+        // Cancel the delayed call to return to pool if the bullet is disabled prematurely
+        CancelInvoke("ReturnToPool");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,18 +66,8 @@ public class Bullet : MonoBehaviour
             {
                 other.GetComponent<EnemyMovement>().TakeDamage(1);
             }
-            Destroy(gameObject);
+            ReturnToPool();
         }
 
-    }
-
-    private void ReturnToPool()
-    {
-        Pool.Release(this);
-    }
-
-    private void ResetDrone()
-    {
-        
     }
 }

@@ -14,6 +14,6 @@ public class ClientObjectPool : MonoBehaviour
     void OnGUI()
     {
         if (GUILayout.Button("Spawn Drones"))
-            _pool.Spawn();
+            _pool.SpawnAndShoot();
     }
 }
