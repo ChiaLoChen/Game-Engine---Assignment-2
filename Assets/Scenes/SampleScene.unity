@@ -5721,7 +5721,6 @@ GameObject:
   - component: {fileID: 2127643225}
   - component: {fileID: 2127643227}
   - component: {fileID: 2127643228}
-  - component: {fileID: 2127643229}
   - component: {fileID: 2127643230}
   m_Layer: 0
   m_Name: Player
@@ -5875,19 +5874,6 @@ MonoBehaviour:
   _kRight: 0
   _kJump: 0
   _kShoot: 0
---- !u!114 &2127643229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127643219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9f7b92423a10242a31a3cc87d76969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7923700210170918196, guid: fad62af828eb97d4399d4696a80d2944, type: 3}
 --- !u!114 &2127643230
 MonoBehaviour:
   m_ObjectHideFlags: 0
