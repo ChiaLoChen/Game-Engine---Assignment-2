@@ -13,48 +13,42 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
+        _rigidbody = GetComponent<Rigidbody>(); 
     }
 
-    // Reset bullet properties before returning it to the pool
     public void ResetBullet()
     {
         _timeAlive = 0f; // Reset time alive
         if (_rigidbody != null)
         {
-            _rigidbody.velocity = Vector3.zero; // Stop any previous velocity
+            _rigidbody.velocity = Vector3.zero;
         }
     }
 
-    // Launch the bullet forward
     public void LaunchBullet()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         _timeAlive = 0f;
         if (_rigidbody != null)
         {
-            // Shoot the bullet forward in the current forward direction
-            _rigidbody.velocity = transform.forward * speed;
+            _rigidbody.velocity = player.transform.forward * speed;
         }
 
-        // Destroy the bullet after its lifetime
         Invoke("ReturnToPool", lifetime);
     }
 
-    // Return bullet to the pool after its lifetime
     private void ReturnToPool()
     {
-        Pool.Release(this); // Return the bullet to the pool after it is destroyed or goes out of bounds
+        Pool.Release(this);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        // Optionally handle bullet collisions, e.g., hit targets
-        ReturnToPool(); // Return the bullet to the pool after collision
+        ReturnToPool();
     }
 
     private void OnDisable()
     {
-        // Cancel the delayed call to return to pool if the bullet is disabled prematurely
         CancelInvoke("ReturnToPool");
     }
 
