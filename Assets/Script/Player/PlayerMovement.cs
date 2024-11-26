@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private ObjectPool _pool;
     void Start()
     {
-        _pool = gameObject.AddComponent<ObjectPool>();
+        _pool = gameObject.GetComponent<ObjectPool>();
         GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         _camera = GameObject.FindGameObjectWithTag("MainCamera");
