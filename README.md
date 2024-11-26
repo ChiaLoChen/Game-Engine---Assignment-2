@@ -13,13 +13,11 @@ GDP improvement from the previous assignment:
 - 
 
 Optimization Design Pattern:
-- Dirty Flag:
-  - UI changes such as score UI
 - Object Pooling
-  - player bullet and enemy spawn
+  - player bullet
 
 DLL/Plugins:
-- Give the player the ability to shoot a bigger bullet by right-clicking 
+- Add in enemy dialogue
 Performance profiling:
 - 
 
