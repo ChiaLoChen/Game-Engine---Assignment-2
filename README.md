@@ -9,7 +9,7 @@ Link to Video Report:
 Chia Lo Chen
 
 GDP improvement from the previous assignment:
-- Labrynth generator update the vertical wall
+- Labyrinth generator updates the vertical wall
 - 
 
 Optimization Design Pattern:
@@ -19,7 +19,7 @@ Optimization Design Pattern:
   - player bullet and enemy spawn
 
 DLL/Plugins:
-- 
+- Give the player the ability to shoot a bigger bullet by right-clicking 
 Performance profiling:
 - 
 
