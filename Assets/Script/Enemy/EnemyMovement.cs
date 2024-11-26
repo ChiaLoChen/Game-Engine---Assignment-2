@@ -70,6 +70,7 @@ public class EnemyMovement : Observer
         if (health <= 0)
         {
             Die();
+            OnEnemyDeath();
         }
 
         if (run)
@@ -88,7 +89,6 @@ public class EnemyMovement : Observer
     {
         scoreUI.OnEnemyDeath();
         scoreUI.SetDirty();
-        OnEnemyDeath();
         Destroy(gameObject);
     }
 /*
