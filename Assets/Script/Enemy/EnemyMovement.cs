@@ -1,9 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 public class EnemyMovement : Observer
 {
+    // Import the OnEnemyDeath and OnPlayDialogue functions from the C++ DLL
+    [DllImport("CourseProject_Plugins", CallingConvention = CallingConvention.Cdecl)]
+    private static extern void SetDebugCallback(DebugCallback callback);
+    [DllImport("CourseProject_Plugins", CallingConvention = CallingConvention.Cdecl)]
+    private static extern void OnEnemyDeath();
+
+    [DllImport("CourseProject_Plugins", CallingConvention = CallingConvention.Cdecl)]
+    
+    private static extern void OnPlayDialogue();
+
+    public delegate void DebugCallback(string message);
+
+    // The callback method that gets called by the C++ DLL
+    private void DebugCallbackMethod(string message)
+    {
+        Debug.Log(message); // This will print the message to Unity's console
+    }
     private ScoreUI scoreUI;
     bool _playerDead = false;
 
@@ -35,12 +53,14 @@ public class EnemyMovement : Observer
 
         _playerManager = FindObjectOfType<PlayerManager>();
         _playerManager.attachObserver(this);
+        SetDebugCallback(DebugCallbackMethod);
+        OnPlayDialogue();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!_playerDead && player!= null)
+        if (!_playerDead && player != null)
         {
             if(Vector3.Magnitude(_playerPosition - transform.position) < distance)
             {
@@ -55,7 +75,7 @@ public class EnemyMovement : Observer
         if (run)
         {
             gameObject.transform.LookAt(player.transform.position);
-            rb.AddForce(-transform.forward.normalized * speed * 10f * Time.deltaTime, ForceMode.Force);
+            rb.AddForce(-transform.forward.normalized * (speed * 10f * Time.deltaTime), ForceMode.Force);
         }
     }
 
@@ -68,6 +88,7 @@ public class EnemyMovement : Observer
     {
         scoreUI.OnEnemyDeath();
         scoreUI.SetDirty();
+        OnEnemyDeath();
         Destroy(gameObject);
     }
 /*
