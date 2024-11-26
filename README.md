@@ -10,7 +10,6 @@ Chia Lo Chen
 
 GDP improvement from the previous assignment:
 - Labyrinth generator updates the vertical wall
-- 
 
 Optimization Design Pattern:
 - Object Pooling
